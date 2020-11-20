@@ -27,16 +27,21 @@ if __name__ == '__main__':
 
     start_length = 10
     time_usage = []
-    interactions = 10
+    length_list = []
+    interactions = 5
     for i in range(interactions):
         random_list = random.sample(range(10000000000), start_length)
         start_time = time.time()
         insertion_sort(random_list)
+        length_list.append(start_length)
         time_usage.append(time.time() - start_time)
         start_length *= 10
 
-    plt.plot([10 ** i for i in range(1, interactions+1)], time_usage, 'ro-')
-    plt.xticks([10 ** i for i in range(1, interactions+1)])
+    for i in range(len(time_usage)):
+        print("time for test %d  with list length %d : %f \t " % (i+1, length_list[i], time_usage[i]))
+
+    plt.plot([i for i in range(interactions)], time_usage, 'ro-')
+    plt.xticks([i for i in range(interactions)], ["10^"+str(i) for i in range(1, interactions+1)])
     plt.xlabel("list length")
     plt.ylabel("time usage")
     plt.show()
