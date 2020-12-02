@@ -36,6 +36,10 @@ def maximum_sublist(num_list, low, high):
     """
     if high - low > 1:
         middle = (low + high) // 2
+        # the possible result can be contained into 3 cases:
+        # 1) sum of the elements on the left side
+        # 2) sum of the elements on the right side
+        # 3) sum of the elements across the middle point
         left_low_index, left_high_index, left_max = maximum_sublist(num_list, low, middle)
         right_low_index, right_high_index, right_max = maximum_sublist(num_list, middle, high)
         cross_low_index, cross_high_index, cross_max = compute_cross_max(num_list, low, high, middle)
