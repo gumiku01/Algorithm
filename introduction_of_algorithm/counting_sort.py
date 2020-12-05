@@ -2,7 +2,7 @@
 # in this case we suppose that the all element to be sorted is positive integer number, 0 included
 import time
 import random
-import matplotlib.pylot as plt
+import matplotlib.pyplot as plt
 
 
 def counting_sort(num_list, tot_n_elem):
@@ -12,6 +12,7 @@ def counting_sort(num_list, tot_n_elem):
 
     # starting count how many times occurs each number
     for number in num_list:
+
         counting_list[number] += 1
 
     # we modify the counting list to represent where is last position to be allocated for each number
@@ -39,17 +40,20 @@ if __name__ == '__main__':
     start_length = 10
     time_usage = []
     length_list = []
-    iteration = 7
+    iteration = 10
 
     for i in range(iteration):
-        random_list = random.sample(range(10000000000), start_length)
+        random_list = random.choices(range(100000), k=start_length)
         start_time = time.time()
-        result = counting_sort(random_list, len(set(random_list)))
+        result = counting_sort(random_list, 100000)
         end_time = time.time() - start_time
         time_usage.append(end_time)
         length_list.append(start_length)
         print("time for iteration number {} with length {}: {}".format(i, start_length, end_time))
         start_length *= 10
 
-
-        
+    plt.plot([i for i in range(iteration)], time_usage, "ro-")
+    plt.xticks([i for i in range(iteration)], ["10^" + str(i) for i in range(1, iteration + 1)])
+    plt.xlabel("length")
+    plt.ylabel("time usage")
+    plt.show()
